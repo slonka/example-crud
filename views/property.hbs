@@ -1,0 +1,67 @@
+<h1>{{title}}</h1>
+
+<a href="/">Go back</a>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Change</th>
+      <th scope="col">Change date</th>
+      <th scope="col">Owner</th>
+      <th scope="col">Address</th>
+      <th scope="col">AirBnB Id</th>
+      <th scope="col">Bedrooms</th>
+      <th scope="col">Bathrooms</th>
+      <th scope="col">Income generated</th>
+    </tr>
+  </thead>
+  <tbody>
+  {{#each properties}}
+    <tr>
+      <td>
+        {{id}}
+      </td>
+      <td>
+        {{versionType}}
+      </td>
+      <td>
+        {{versionTimestamp}}
+      </td>
+      <td>
+        {{owner}}
+      </td>
+      <td>
+        {{#with address}}
+          {{#if line1}}
+            {{line1}}<br/>
+          {{/if}}
+          {{#if line2}}
+            {{line2}}<br/>
+          {{/if}}
+          {{#if line3}}
+            {{line3}}<br/>
+          {{/if}}
+          {{#if line4}}
+            {{line4}}<br/>
+          {{/if}}
+
+          {{postCode}} {{city}} {{country}}
+        {{/with}}
+      </td>
+      <td>
+        {{airbnbId}}
+      </td>
+      <td>
+        {{numberOfBedrooms}}
+      </td>
+      <td>
+        {{numberOfBathrooms}}
+      </td>
+      <td>
+        {{incomeGenerated}}
+      </td>
+    </tr>
+  {{/each}}
+  </tbody>
+</table>

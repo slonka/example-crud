@@ -1,0 +1,185 @@
+{
+	"info": {
+		"_postman_id": "369f2480-a7cd-4222-bf92-1f68310b7926",
+		"name": "hostmaker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get all properties",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{proto}}://{{ip}}:{{port}}/api/properties",
+					"protocol": "{{proto}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"properties"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get one property",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{proto}}://{{ip}}:{{port}}/api/properties/1",
+					"protocol": "{{proto}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"properties",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get property versions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{proto}}://{{ip}}:{{port}}/api/properties/1/versions",
+					"protocol": "{{proto}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"properties",
+						"1",
+						"versions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add not valid property",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"owner\": \"carlos\",\r\n    \"address\": {\r\n        \"line1\": \"Flat 5\",\r\n        \"line4\": \"7 Westbourne Terrace\",\r\n        \"postCode\": \"W2 3UL\",\r\n        \"city\": \"London\",\r\n        \"country\": \"U.K.\"\r\n    },\r\n    \"airbnbId\": 242424242424,\r\n    \"numberOfBedrooms\": 1,\r\n    \"numberOfBathrooms\": 1,\r\n    \"incomeGenerated\": 2000.34\r\n}"
+				},
+				"url": {
+					"raw": "{{proto}}://{{ip}}:{{port}}/api/properties",
+					"protocol": "{{proto}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"properties"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add valid property",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"owner\": \"carlos\",\r\n    \"address\": {\r\n        \"line1\": \"Flat 5\",\r\n        \"line4\": \"7 Westbourne Terrace\",\r\n        \"postCode\": \"W2 3UL\",\r\n        \"city\": \"London\",\r\n        \"country\": \"U.K.\"\r\n    },\r\n    \"airbnbId\": 2354700,\r\n    \"numberOfBedrooms\": 1,\r\n    \"numberOfBathrooms\": 1,\r\n    \"incomeGenerated\": 2000.34\r\n}"
+				},
+				"url": {
+					"raw": "{{proto}}://{{ip}}:{{port}}/api/properties",
+					"protocol": "{{proto}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"properties"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update 1st property owner to jan",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"owner\": \"jan\"\n}"
+				},
+				"url": {
+					"raw": "{{proto}}://{{ip}}:{{port}}/api/properties/1",
+					"protocol": "{{proto}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"properties",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete one property",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{proto}}://{{ip}}:{{port}}/api/properties/1",
+					"protocol": "{{proto}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"properties",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

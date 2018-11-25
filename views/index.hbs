@@ -1,0 +1,170 @@
+<h1>{{title}}</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Owner</th>
+      <th scope="col">Address</th>
+      <th scope="col">AirBnB Id</th>
+      <th scope="col">Bedrooms</th>
+      <th scope="col">Bathrooms</th>
+      <th scope="col">Income generated</th>
+    </tr>
+  </thead>
+  <tbody>
+  {{#each properties}}
+    <tr>
+      <td>
+        <a href="property/{{id}}">{{id}}</a>
+      </td>
+      <td>
+        {{owner}}
+      </td>
+      <td>
+        {{#with address}}
+          {{#if line1}}
+            {{line1}}<br/>
+          {{/if}}
+          {{#if line2}}
+            {{line2}}<br/>
+          {{/if}}
+          {{#if line3}}
+            {{line3}}<br/>
+          {{/if}}
+          {{#if line4}}
+            {{line4}}<br/>
+          {{/if}}
+
+          {{postCode}} {{city}} {{country}}
+        {{/with}}
+      </td>
+      <td>
+        {{airbnbId}}
+      </td>
+      <td>
+        {{numberOfBedrooms}}
+      </td>
+      <td>
+        {{numberOfBathrooms}}
+      </td>
+      <td>
+        {{incomeGenerated}}
+      </td>
+    </tr>
+  {{/each}}
+  </tbody>
+</table>
+
+<br>
+<hr>
+<br>
+
+<h1>Add a new property</h1>
+<form id="add-property">
+  <div class="form-group row">
+    <label for="owner" class="col-4 col-form-label">Owner</label>
+    <div class="col-8">
+      <input id="owner" name="owner" type="text" class="form-control here" required="required">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="line1" class="col-4 col-form-label">Address line 1</label>
+    <div class="col-8">
+      <input id="line1" name="line1" type="text" class="form-control here" required="required">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="line2" class="col-4 col-form-label">Address line 2</label>
+    <div class="col-8">
+      <input id="line2" name="line2" type="text" class="form-control here">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="line3" class="col-4 col-form-label">Address line 3</label>
+    <div class="col-8">
+      <input id="line3" name="line3" type="text" class="form-control here">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="line4" class="col-4 col-form-label">Address line 4</label>
+    <div class="col-8">
+      <input id="line4" name="line4" type="text" class="form-control here" required="required">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="postCode" class="col-4 col-form-label">Post code</label>
+    <div class="col-8">
+      <input id="postCode" name="postCode" type="text" class="form-control here" required="required">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="city" class="col-4 col-form-label">City</label>
+    <div class="col-8">
+      <input id="city" name="city" type="text" class="form-control here" required="required">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="country" class="col-4 col-form-label">Country</label>
+    <div class="col-8">
+      <input id="country" name="country" type="text" class="form-control here" required="required">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="airbnbId" class="col-4 col-form-label">AirBnB Id</label>
+    <div class="col-8">
+      <input id="airbnbId" name="airbnbId" type="text" class="form-control here" required="required">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="numberOfBedrooms" class="col-4 col-form-label">Number of bedrooms</label>
+    <div class="col-8">
+      <input id="numberOfBedrooms" name="numberOfBedrooms" type="text" class="form-control here" required="required">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="numberOfBathrooms" class="col-4 col-form-label">Number of bathrooms</label>
+    <div class="col-8">
+      <input id="numberOfBathrooms" name="numberOfBathrooms" type="text" class="form-control here" required="required">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="incomeGenerated" class="col-4 col-form-label">Income generated</label>
+    <div class="col-8">
+      <input id="incomeGenerated" name="incomeGenerated" type="number" step="0.01" class="form-control here" required="required">
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="offset-4 col-8">
+      <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+</form>
+
+<script>
+  const form = document.querySelector('#add-property');
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const data = $(event.target).serializeArray().reduce((prev, curr) => { prev[curr.name] = curr.value; return prev}, {});
+    fetch('/api/properties', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(data)
+    }).then(async function(response) {
+      if (response.status === 201) {
+        location.reload();
+      } else {
+        const body = await response.json();
+        alert('Could not save, response code: ' + response.status + ', message: ' + body.message);
+      }
+    })
+    .catch(function(err) {
+      alert('Could not save', err);
+    });
+
+    return false;
+  });
+</script>
